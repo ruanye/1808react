@@ -1,5 +1,5 @@
-import React from "./react";
-import { render } from "./react-dom";
+import React from "react";
+import { render } from "react-dom";
 //jsx 语法 js+xml(html)
 //jsx 会自动使用React.creatElement方法
 //用{}js
@@ -9,7 +9,8 @@ import { render } from "./react-dom";
 function fn() {
   alert(1);
 }
-let ele = <div onMouseLeave={fn}>点击我</div>;
+let ele = [<div onClick={fn}>点击我</div>, <span>这是span元素</span>];
+
 let ele1 = React.createElement("h1", {
   className: "a",
   style: {
@@ -28,4 +29,4 @@ let ele1 = React.createElement("h1", {
   type: "h1",
   props: {className: "a",id:"1",children:'hello world'}
 }**/
-render(ele1, document.getElementById("root"));
+render(ele, document.getElementById("root"));
