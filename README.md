@@ -51,7 +51,16 @@ Object.entries({name:'lili',age:3})
  '1,2,3,4'
 ```
 - innerHtml => dangerouslySetInnerHTML v-html xss 攻击 可以信赖的内容
+```jsx
+ <div dangerouslySetInnerHTML={{ __html: "<span>这是插入的html</span>"}}></div>
+```
 - {} 取值放 js 代码 必须要有返回值
 - 事件 事件名 on 大写开头的名字 后面跟的是方法
+```jsx
+function fn() {
+  alert(1);
+}
+let ele = <div onClick={fn}>点击我</div>
+```
 - 注释只能采用 js 注释
 - html 里区别： 遇到 js 变量需要用{} 来包裹
