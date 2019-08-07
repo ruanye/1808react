@@ -84,4 +84,29 @@ Object.entries({name:'lili',age:3})
  [1,2,3,4].join() 
  '1,2,3,4'
 ```
+### 使用展开运算符和Object.assign进行对象的拷贝 浅拷贝  
+```js
+  let obj = { name: "lili", a:{ b: 1 }};
+  let obj1 = { ...obj };
+  console.log(obj.a === obj1.a); //结果true
+   //object.assign 合并对象 浅拷贝  
+   let obj = { name: "lili", a: { b: 1 } };
+   let obj1 = Object.assign({}, obj); //完全等价于 {...obj}
+   console.log(obj1);
+   //案例2
+    let obj = { name: "lili", a: { b: 1 } };
+    let obj1 = { age: 3, name: "lilei" };
+    //target 目标对象  source  来源对象  如果有相同的key 来源的(后面的)key会覆盖(前面的)目标的key 
+    let obj2 = Object.assign(obj, obj1);
+    console.log(obj2); //name lilei 
+```
+### 对象的深拷贝(为了不改变原数据结构) 
+```js
+// 方案1 缺点不能拷贝函数、undefined等 
+   let obj = { a: 1, b: { name: "xiaoming" } };
+   let cloneobj = JSON.parse(JSON.stringify(obj));
+//方案2 递归拷贝 
+
+```
+
 

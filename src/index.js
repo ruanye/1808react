@@ -1,32 +1,28 @@
-import React from "react";
 import { render } from "react-dom";
-//jsx 语法 js+xml(html)
-//jsx 会自动使用React.creatElement方法
-//用{}js
-// let str = "<span>这是插入的html</span>";
-// 可以信赖的html才使用 防止xss攻击
-// let ele = <div dangerouslySetInnerHTML={{ __html: "<span>这是插入的html</span>"}}></div>;
-function fn() {
-  alert(1);
-}
-let ele = [<div onClick={fn}>点击我</div>, <span>这是span元素</span>];
-
-let ele1 = React.createElement("h1", {
-  className: "a",
-  style: {
-    color: "red",
-    fontSize: "28px"
-  },
-  dangerouslySetInnerHTML: {
-    __html: "<span>这是插入的html</span>"
-  },
-  onClick: function() {
-    alert(1);
+let React = {
+  createElement: function(type,config={},children) {
+   /// {className: "a"} config 
+    //返回一个描述dom解构的对象
+     let props = {}
+      props = {...config}
+      
+     
   }
-});
+};
+// let  ele1  = <h1>helloworld<span>span</span><span>222</span></h1>
+let ele = React.createElement(
+  "h1",
+  {
+    className: "a"
+  },
+  "hello world",
+  React.createElement("span", null, "span")
+);
 
 /* { ele 就是这个对象   react元素/虚拟dom 
   type: "h1",
-  props: {className: "a",id:"1",children:'hello world'}
+  props: {className: "a",children:'hello world'}
+  2个children的时候  ["hello world", {…}]
 }**/
+console.log(ele);
 render(ele, document.getElementById("root"));
