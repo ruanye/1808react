@@ -1,12 +1,14 @@
 import { render } from "react-dom";
 let React = {
-  createElement: function(type,config={},children) {
-   /// {className: "a"} config 
+  createElement: function(type, config = {}, children) {
+    /// {className: "a"} config
     //返回一个描述dom解构的对象
-     let props = {}
-      props = {...config}
-      
+    let props = {};
+    props = { ...config };
+    //chidren
+    let args =Array.from(arguments).slice(2);
      
+    
   }
 };
 // let  ele1  = <h1>helloworld<span>span</span><span>222</span></h1>

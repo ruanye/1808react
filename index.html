@@ -10,13 +10,14 @@
     <script>
       let obj = {
         a: 1,
-        b: { name: "xiaoming", c: function() {} },
-        d: undefined
+        b: { name: "xiaoming" },
+        d: undefined,
+        g: /\^a/
       };
       function deepClone(obj) {
         //处理特殊情况
         if (typeof obj === null) return null;
-        if (!typeof obj === "object") return obj;
+        if (typeof obj !== "object") return obj;
         if (obj instanceof Date) {
           return new Date(obj);
         }
@@ -27,10 +28,13 @@
         let cloneobj = new obj.constructor();
         for (let key in obj) {
           //不拷贝原型上的属性
-          cloneobj[key] = deepClone(obj[key]);
+          if (obj.hasOwnProperty(key)) {
+            cloneobj[key] = deepClone(obj[key]);
+          }
         }
         return cloneobj;
       }
+
       let result = deepClone(obj);
       console.log(result);
     </script>
