@@ -1,4 +1,3 @@
-// import { render } from "react-dom";
 let React = {
   createElement: function(type, config = {}, children) {
     /// {className: "a"} config
@@ -23,15 +22,27 @@ let ele1 = (
     </label>
   </h1>
 );
-
+function fn() {
+  alert("事件执行");
+}
 //<div id='root'><h1></h1></div>
 let ele = React.createElement(
   "h1",
   {
-    className: "a"
+    className: "a",
+    style: {
+      color: "red",
+      fontSize: "40px",
+      WebkitBoxSizing: "border-box"
+    },
+    onClick: fn
   },
   "hello world",
-  React.createElement("span", null, "span"),
+  React.createElement("span", {
+    dangerouslySetInnerHTML: {
+      __html: "<div>这是插入的html</div>"
+    }
+  }),
   React.createElement(
     "label",
     {
@@ -71,12 +82,36 @@ function render(ele, root) {
     } else if (key === "className") {
       //1. class 要写成className
       tagName.setAttribute("class", props[key]);
-    }else if(key ==='htmlFor'){
+    } else if (key === "htmlFor") {
       //2. for 要写成htmlFor
       tagName.setAttribute("for", props[key]);
-    }else if(key ==='style'){
-      //style 要写成对象 
-      
+    } else if (key === "style") {
+      //取出style对象 props= {className: "a",style:{color:red}}
+      let styleobj = props[key];
+      for (let k in styleobj) {
+        tagName.style[k] = styleobj[k];
+      }
+      //cssText 可以设置style 属性
+      //div.style.cssText = 'font-size:14px;color:red'
+      //style 要写成对象
+    } else if (key === "dangerouslySetInnerHTML") {
+      /** props:{dangerouslySetInnerHTML: {
+         __html:'<div></div>'
+        }
+      }
+      */
+      //innerHTML 要写成dangerouslySetInnerHTML  可以信赖的内容  防止xss攻击 元素里面不要再放其他标签
+      let { __html } = props[key]; //div那个字符串
+      tagName.innerHTML = __html;
+    } else if (/on[A-Z][a-z]/.test(key)) {
+      //拿到事件名
+      let eventname = key.toLowerCase().slice(2);
+      //拿到事件执行的函数
+      let fn = props[key];
+      tagName.addEventListener(eventname, fn);
+      //jsx 事件要写成on 加大写字母开头 驼峰命名法
+    } else {
+      tagName.setAttribute(key, props[key]);
     }
   }
 }

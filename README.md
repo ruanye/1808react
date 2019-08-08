@@ -16,7 +16,7 @@
 
 ### jsx 语法以及 jsx 写法特点
 
-1. jsx js + xml(html) jsx 写 js 使用{} <> 表示 html 标签
+1. jsx 语法糖  js + xml(html) jsx 写 js 使用{} <> 表示 html 标签
 2. class => className class 关键字
 3. label for => htmlFor
 4. style => 对象形式 {fontSize:16px;color:red}
@@ -40,6 +40,7 @@ function fn() {
   alert(1);
 }
 let ele = <div onClick={fn}>点击我</div>;
+let ele = <div onMouseOver={fn}>点击我</div>;
 ```
 
 8. jsx 语法里面写注释只能采用 {}
@@ -82,23 +83,20 @@ render(ele, container);
 </script>
 ```
 
--
-
 ### 对象新增的方法
 
 ```js
-Object.keys({ name: "lili", age: 3 })[ //es5
+Object.keys({ name: "lili", age: 3 }) //es5
+//结果
+ [ "name", "age"];
+
+Object.values({ name: "lili", age: 3 })
   //结果
-  ("name", "age")
-];
-Object.values({ name: "lili", age: 3 })[
+["lili", 3]
+;
+Object.entries({ name: "lili", age: 3 })
   //结果
-  ("lili", 3)
-];
-Object.entries({ name: "lili", age: 3 })[
-  //结果
-  (["name", "lili"], ["age", 3])
-];
+[["name", "lili"], ["age", 3]]
 ```
 
 ### 数组转字符串 join 字符串转数组 split
