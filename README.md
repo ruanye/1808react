@@ -12,7 +12,7 @@
 
 1. document.createTextNode() 创建文本节点
 2. jsx 语法 默认会使用大写 React 这个变量  因为 jsx 语法会自动调用 React.creatElenment 这个方法
-3. 用对象来描述元素叫做虚拟 dom creatElement 方法返回的是一个 react 元素/虚拟 dom(对象)
+3. 用对象来描述元素叫做虚拟dom  creatElement 方法返回的是一个 react元素/虚拟dom (对象)
 
 ### jsx 语法以及 jsx 写法特点
 
@@ -26,14 +26,14 @@
 <h1 className="a" style={{ fontSize: "16px", color: "red" }} />
 ```
 
-1. innerHtml => dangerouslySetInnerHTML v-html xss 攻击 可以信赖的内容
+5. innerHtml => dangerouslySetInnerHTML v-html xss 攻击 可以信赖的内容
 
 ```jsx
 <div dangerouslySetInnerHTML={{ __html: "<span>这是插入的html</span>" }} />
 ```
 
-2. {} 取值放 js 代码 必须要有返回值
-3. 事件 事件名 on 大写开头的名字 后面跟的是方法 驼峰命名
+6. {} 取值放 js 代码 必须要有返回值
+7. 事件 事件名 on 大写开头的名字 后面跟的是方法 驼峰命名
 
 ```jsx
 function fn() {
@@ -42,7 +42,7 @@ function fn() {
 let ele = <div onClick={fn}>点击我</div>;
 ```
 
-4. jsx 语法里面写注释只能采用 {}
+8. jsx 语法里面写注释只能采用 {}
 
 ```js
 //多行注释
@@ -55,7 +55,7 @@ let ele = <div onClick={fn}>点击我</div>;
 }
 ```
 
-5. jsx 元素只能有一个根元素，当不想有父元素生成的时候，可以用空标签进行包裹
+9. jsx 元素只能有一个根元素，当不想有父元素生成的时候，可以用空标签进行包裹
 
 ```jsx
 //例子  <> 和  <React.Fragment> 等价
@@ -65,7 +65,7 @@ let ele = <div onClick={fn}>点击我</div>;
  <>
 ```
 
-6. react render 方法可以渲染数组
+10. react render 方法可以渲染数组
 
 ```jsx
 //例子
@@ -111,8 +111,7 @@ Object.entries({ name: "lili", age: 3 })[
 ("1,2,3,4");
 ```
 
-### 使用展开运算符和 Object.assign 进行对象的拷贝 浅拷贝
-
+### 使用展开运算符和 Object.assign 进行对象的拷贝 浅拷贝 for in 一层也是浅拷贝(注意：如果对象只有一层也叫浅拷贝) 
 ```js
 let obj = { name: "lili", a: { b: 1 } };
 let obj1 = { ...obj };
@@ -135,10 +134,11 @@ console.log(obj2); //name lilei
 // 方案1 缺点不能拷贝函数、undefined等
 let obj = { a: 1, b: { name: "xiaoming" } };
 let cloneobj = JSON.parse(JSON.stringify(obj));
-//方案2 递归拷贝
+//方案2 递归拷贝 
+//核心逻辑  for in 循坏对象 如果对象的key 继续是对象的时候需要递归 
 function deepClone(obj) {
   //处理特殊情况
-  if (typeof obj === null) return null;
+  if (obj === null) return null;
   if (typeof obj !== "object") return obj;
   if (obj instanceof Date) {
     return new Date(obj);
@@ -183,3 +183,13 @@ function deepClone(obj) {
       console.log(spanary);
   </script>
 ```
+### 判断数据类型的4种方式（必须会）
+1. Object.prototype.toString.call 
+2. instanceof 
+3. typeof 
+4. constructor 
+### 面试题
+```js 
+null instanceof Object //false
+typeof null  //object 
+```  
